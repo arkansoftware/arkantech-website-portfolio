@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Arkan - Leading Design & Development of Web Solutions and Software Systems">
+    <title>Arkan | Innovative Web Solutions</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Arkan Logo">
+                <span>ARKAN</span>
+            </a>
+            <div class="nav-links">
+                <a href="#services" data-i18n="nav_services">Services</a>
+                <a href="#portfolio" data-i18n="nav_portfolio">Our Work</a>
+                <a href="#about" data-i18n="nav_about">About</a>
+                <a href="#contact" class="btn-primary" data-i18n="nav_contact">Contact Us</a>
+
+                <!-- Controls -->
+                <div class="nav-controls">
+                    <button id="theme-toggle" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="lang-toggle" aria-label="Toggle Language">
+                        AR
+                    </button>
+                </div>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-close"><i class="fas fa-times"></i></div>
+        <a href="#services" data-i18n="nav_services">Services</a>
+        <a href="#portfolio" data-i18n="nav_portfolio">Our Work</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#contact" data-i18n="nav_contact">Contact Us</a>
+        <div class="mobile-controls">
+            <button id="mobile-theme-toggle" class="control-btn">
+                <i class="fas fa-moon"></i> <span data-i18n="toggle_theme">Theme</span>
+            </button>
+            <button id="mobile-lang-toggle" class="control-btn">
+                <i class="fas fa-globe"></i> <span data-i18n="toggle_lang">English</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-bg-glow"></div>
+        <div class="container hero-content">
+            <h1 class="fade-in-up"><span data-i18n="hero_title_1">Building Digital</span> <span class="text-gradient"
+                    data-i18n="hero_title_2">Excellence</span></h1>
+            <p class="fade-in-up delay-100" data-i18n="hero_desc">Specializing in the design and development of
+                innovative web solutions and robust software systems.</p>
+            <div class="hero-btns fade-in-up delay-200">
+                <a href="#portfolio" class="btn-primary" data-i18n="hero_btn_projects">View Projects</a>
+                <a href="#contact" class="btn-secondary" data-i18n="hero_btn_contact">Get in Touch</a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="services section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="services_title">Our Expertise</h2>
+                <p data-i18n="services_subtitle">We craft digital experiences that drive growth.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="icon-box"><i class="fas fa-code"></i></div>
+                    <h3 data-i18n="service_1_title">Web Development</h3>
+                    <p data-i18n="service_1_desc">Custom websites built with modern technologies ensuring performance,
+                        security, and scalability.</p>
+                </div>
+                <div class="service-card reveal delay-100">
+                    <div class="icon-box"><i class="fas fa-paint-brush"></i></div>
+                    <h3 data-i18n="service_2_title">UI/UX Design</h3>
+                    <p data-i18n="service_2_desc">Intuitive and visually stunning interfaces that provide seamless user
+                        experiences across all devices.</p>
+                </div>
+                <div class="service-card reveal delay-200">
+                    <div class="icon-box"><i class="fas fa-server"></i></div>
+                    <h3 data-i18n="service_3_title">Software Systems</h3>
+                    <p data-i18n="service_3_desc">Robust enterprise software solutions tailored to streamline your
+                        business operations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="portfolio_title">Featured Projects</h2>
+                <p data-i18n="portfolio_subtitle">A glimpse into our recent success stories.</p>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <a href="https://alassel.com/" target="_blank" class="project-card reveal">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=Al+Assel&background=0D8ABC&color=fff&size=400&font-size=0.33"
+                            alt="Al Assel">
+                    </div>
+                    <div class="project-info">
+                        <h3>Al Assel</h3>
+                        <p>Web Solution</p>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://www.alryah.ly/" target="_blank" class="project-card reveal delay-100">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=Al+Ryah&background=6C63FF&color=fff&size=400&font-size=0.33"
+                            alt="Al Ryah">
+                    </div>
+                    <div class="project-info">
+                        <h3>Al Ryah</h3>
+                        <p>Corporate Website</p>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://atlasserafa.ly/" target="_blank" class="project-card reveal delay-200">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=Atlas+Serafa&background=FF6584&color=fff&size=400&font-size=0.33"
+                            alt="Atlas Serafa">
+                    </div>
+                    <div class="project-info">
+                        <h3>Atlas Serafa</h3>
+                        <p>Financial Services</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section-padding">
+        <div class="container">
+            <div class="contact-wrapper reveal">
+                <div class="contact-content">
+                    <h2 data-i18n="contact_title">Ready to Start?</h2>
+                    <p data-i18n="contact_desc">Let's transform your ideas into reality. Reach out to us today.</p>
+
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <span data-i18n="contact_call">Call Us</span>
+                                <a href="tel:0910074733">0910074733</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-facebook"></i>
+                            <div>
+                                <span data-i18n="contact_follow">Follow Us</span>
+                                <a href="https://www.facebook.com/profile.php?id=61585559952875" target="_blank"
+                                    data-i18n="contact_fb">Facebook Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-visual">
+                    <div class="glass-card">
+                        <span>ARKAN</span>
+                        <small>Innovate. Create. Elevate.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                
+                <p data-i18n="footer_desc">Empowering businesses through digital innovation.</p>
+            </div>
+            <div class="footer-bottom" data-i18n="footer_rights">
+                &copy; 2026 Arkan. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
