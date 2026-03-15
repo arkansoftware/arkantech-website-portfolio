@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.querySelector('.mobile-menu');
     const mobileMenuClose = document.querySelector('.mobile-menu-close');
     const mobileLinks = document.querySelectorAll('.mobile-menu a');
-    const revealElements = document.querySelectorAll('.reveal');
 
     // Theme & Language Elements
     const themeToggle = document.getElementById('theme-toggle');
@@ -44,7 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
             footer_desc: "Empowering businesses through digital innovation.",
             footer_rights: "&copy; 2026 Arkan. All rights reserved.",
             toggle_theme: "Theme",
-            toggle_lang: "English"
+            toggle_lang: "English",
+            stat_projects: "Projects Delivered",
+            stat_clients: "Happy Clients",
+            stat_satisfaction: "% Satisfaction"
         },
         ar: {
             nav_services: "خدماتنا",
@@ -74,7 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
             footer_desc: "تمكين الشركات من خلال الابتكار الرقمي.",
             footer_rights: "&copy; 2026 أركان. جميع الحقوق محفوظة.",
             toggle_theme: "المظهر",
-            toggle_lang: "العربية"
+            toggle_lang: "العربية",
+            stat_projects: "مشاريع منجزة",
+            stat_clients: "عملاء سعداء",
+            stat_satisfaction: "% رضا العملاء"
         }
     };
 
@@ -148,13 +153,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Navbar Scroll Effect
+    // --- Navbar scroll effect ---
+    let lastScroll = 0;
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        const currentScroll = window.scrollY;
+        if (currentScroll > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+        lastScroll = currentScroll;
     });
 
     // Mobile Menu Toggle
@@ -175,17 +183,22 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', closeMenu);
     });
 
-    // Scroll Animation (Intersection Observer)
+
+    // ==========================================
+    // Scroll Reveal Animation (Intersection Observer)
+    // ==========================================
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
     const observerOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.1,
+        rootMargin: "0px 0px -60px 0px"
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Only animate once
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -195,7 +208,212 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Smooth Scrolling for Anchor Links (Optional modern browser support covers this, but good as fallback/control)
+    // ==========================================
+    // Animated Number Counter
+    // ==========================================
+    function animateCounter(el) {
+        const target = parseInt(el.getAttribute('data-count'));
+        const duration = 2000;
+        const start = 0;
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(start + (target - start) * eased);
+
+            el.textContent = current + (el.closest('.stat-item')?.querySelector('.stat-label')?.textContent.startsWith('%') ? '' : '+');
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                el.textContent = target + (el.closest('.stat-item')?.querySelector('.stat-label')?.textContent.startsWith('%') ? '' : '+');
+            }
+        }
+
+        requestAnimationFrame(updateCounter);
+    }
+
+    // Observe stat counters
+    const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(el => counterObserver.observe(el));
+
+
+    // ==========================================
+    // Particle System (Hero Background)
+    // ==========================================
+    const canvas = document.getElementById('particles-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
+        let mouseX = 0;
+        let mouseY = 0;
+
+        function resizeCanvas() {
+            const hero = canvas.parentElement;
+            canvas.width = hero.offsetWidth;
+            canvas.height = hero.offsetHeight;
+        }
+
+        function createParticles() {
+            particles = [];
+            const particleCount = Math.min(60, Math.floor((canvas.width * canvas.height) / 15000));
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 0.5,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    speedY: (Math.random() - 0.5) * 0.5,
+                    opacity: Math.random() * 0.5 + 0.1
+                });
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const theme = htmlElement.getAttribute('data-theme');
+            const baseColor = theme === 'dark' ? '59, 130, 246' : '37, 99, 235';
+
+            particles.forEach((p, i) => {
+                // Update position
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                // Mouse interaction - gentle repulsion
+                const dx = p.x - mouseX;
+                const dy = p.y - mouseY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    p.x += dx * 0.01;
+                    p.y += dy * 0.01;
+                }
+
+                // Wrap around edges
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                // Draw particle
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${baseColor}, ${p.opacity})`;
+                ctx.fill();
+
+                // Draw connections between nearby particles
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx2 = p.x - p2.x;
+                    const dy2 = p.y - p2.y;
+                    const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+
+                    if (dist2 < 150) {
+                        const lineOpacity = (1 - dist2 / 150) * 0.15;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(${baseColor}, ${lineOpacity})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            animationId = requestAnimationFrame(drawParticles);
+        }
+
+        // Mouse tracking for particle interaction
+        const hero = canvas.parentElement;
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+
+        // Initialize particles
+        resizeCanvas();
+        createParticles();
+        drawParticles();
+
+        // Handle resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                resizeCanvas();
+                createParticles();
+            }, 250);
+        });
+    }
+
+
+    // ==========================================
+    // Tilt Effect on Service Cards
+    // ==========================================
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    serviceCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 15;
+            const rotateY = (centerX - x) / 15;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+        });
+    });
+
+
+    // ==========================================
+    // Active Nav Link Highlighting on Scroll
+    // ==========================================
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a:not(.btn-primary)');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (window.scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+
+    // ==========================================
+    // Smooth Scrolling for Anchor Links
+    // ==========================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -204,7 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                // Adjust for fixed navbar height
                 const headerOffset = 80;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -214,6 +431,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: "smooth"
                 });
             }
+        });
+    });
+
+
+    // ==========================================
+    // Parallax effect on hero orbs
+    // ==========================================
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const orbs = document.querySelectorAll('.hero-orb');
+        orbs.forEach((orb, i) => {
+            const speed = (i + 1) * 0.1;
+            orb.style.transform = `translateY(${scrolled * speed}px)`;
         });
     });
 });

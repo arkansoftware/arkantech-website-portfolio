@@ -71,6 +71,10 @@
 
     <!-- Hero Section -->
     <header class="hero">
+        <canvas id="particles-canvas"></canvas>
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
         <div class="hero-bg-glow"></div>
         <div class="container hero-content">
             <h1 class="fade-in-up"><span data-i18n="hero_title_1">Building Digital</span> <span class="text-gradient"
@@ -81,16 +85,34 @@
                 <a href="#portfolio" class="btn-primary" data-i18n="hero_btn_projects">View Projects</a>
                 <a href="#contact" class="btn-secondary" data-i18n="hero_btn_contact">Get in Touch</a>
             </div>
+            <!-- Animated Stats -->
+            <div class="hero-stats fade-in-up delay-300">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="20">0</span>
+                    <span class="stat-label" data-i18n="stat_projects">Projects Delivered</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="20">0</span>
+                    <span class="stat-label" data-i18n="stat_clients">Happy Clients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="100">0</span>
+                    <span class="stat-label" data-i18n="stat_satisfaction">% Satisfaction</span>
+                </div>
+            </div>
         </div>
         <div class="scroll-down">
             <i class="fas fa-chevron-down"></i>
         </div>
     </header>
 
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
     <!-- Services Section -->
     <section id="services" class="services section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2 data-i18n="services_title">Our Expertise</h2>
                 <p data-i18n="services_subtitle">We craft digital experiences that drive growth.</p>
             </div>
@@ -117,10 +139,13 @@
         </div>
     </section>
 
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2 data-i18n="portfolio_title">Featured Projects</h2>
                 <p data-i18n="portfolio_subtitle">A glimpse into our recent success stories.</p>
             </div>
@@ -137,6 +162,7 @@
                     <div class="project-info">
                         <h3>Al Assel</h3>
                         <p>Web Solution</p>
+                        <span class="project-tag">Website</span>
                     </div>
                 </a>
 
@@ -152,6 +178,7 @@
                     <div class="project-info">
                         <h3>Al Ryah</h3>
                         <p>Corporate Website</p>
+                        <span class="project-tag">Corporate</span>
                     </div>
                 </a>
 
@@ -167,16 +194,68 @@
                     <div class="project-info">
                         <h3>Atlas Serafa</h3>
                         <p>Financial Services</p>
+                        <span class="project-tag">Finance</span>
+                    </div>
+                </a>
+
+                <!-- Project 4 -->
+                <a href="https://bhco.ly/" target="_blank" class="project-card reveal delay-300">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=BHCO&background=fd7e14&color=fff&size=400&font-size=0.33"
+                            alt="BHCO">
+                    </div>
+                    <div class="project-info">
+                        <h3>BHCO</h3>
+                        <p>Corporate Website</p>
+                        <span class="project-tag">Corporate</span>
+                    </div>
+                </a>
+
+                <!-- Project 5 - Al Sanad Al Afdhal -->
+                <a href="https://alsanadelafthal.ly/" target="_blank" class="project-card reveal delay-400">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=Al+Sanad&background=10b981&color=fff&size=400&font-size=0.33"
+                            alt="Al Sanad Al Afdhal">
+                    </div>
+                    <div class="project-info">
+                        <h3>Al Sanad Al Afdhal</h3>
+                        <p>Electrical Supplies</p>
+                        <span class="project-tag">Business</span>
+                    </div>
+                </a>
+
+                <!-- Project 6 - Clips Stationery -->
+                <a href="https://www.clips-stationery.ly/" target="_blank" class="project-card reveal delay-100">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=Clips&background=8b5cf6&color=fff&size=400&font-size=0.33"
+                            alt="Clips Stationery">
+                    </div>
+                    <div class="project-info">
+                        <h3>Clips Stationery</h3>
+                        <p>Stationery Store</p>
+                        <span class="project-tag">E-Commerce</span>
                     </div>
                 </a>
             </div>
         </div>
     </section>
 
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
     <!-- Contact Section -->
     <section id="contact" class="contact section-padding">
         <div class="container">
-            <div class="contact-wrapper reveal">
+            <div class="contact-wrapper reveal-scale">
                 <div class="contact-content">
                     <h2 data-i18n="contact_title">Ready to Start?</h2>
                     <p data-i18n="contact_desc">Let's transform your ideas into reality. Reach out to us today.</p>
@@ -213,7 +292,7 @@
     <footer>
         <div class="container footer-content">
             <div class="footer-logo">
-                
+
                 <p data-i18n="footer_desc">Empowering businesses through digital innovation.</p>
             </div>
             <div class="footer-bottom" data-i18n="footer_rights">
